@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="OniigallApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:OniigallApp"
+    xmlns:pages="clr-namespace:OniigallApp.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="True"
+    Title="OniigallApp">
+
+    <!--<ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />-->
+    <TabBar CompressedLayout.IsHeadless="True">
+        <Tab Title="홈"
+            Icon="list_logo.png">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+        </Tab>
+        <Tab Title="개념글"
+            Icon="star_logo.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:RecommendPage}" />
+        </Tab>
+        <Tab Title="공지"
+            Icon="help_logo.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:NoticePage}" />
+        </Tab>
+        <Tab Title="검색"
+            Icon="search_logo.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:GallSearchPage}" />
+        </Tab>
+    </TabBar>
+
+</Shell>

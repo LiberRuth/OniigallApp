@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OniigallApp.Views.GallSearchPage"
+             Title ="검색">
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="Transparent"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <VerticalStackLayout>
+                <StackLayout HorizontalOptions="Center" Spacing="5">
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                        <Picker x:Name="searchtype" 
+                            ItemsSource="{Binding type_list}"
+                            ItemDisplayBinding="{Binding text}"
+                            SelectedIndex="1">
+                        </Picker>
+                        <Label Margin="10,0,0,0" VerticalOptions="Center" Text="개념글"/>
+                        <CheckBox x:Name="gallCheckBox"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="2">
+                        <Entry x:Name="entry"
+                           Placeholder="입력..."
+                           Completed="Entry_Completed"
+                           ReturnType="Search"
+                           VerticalOptions="Start"
+                           MinimumWidthRequest="{OnPlatform WinUI=500, MacCatalyst=500, Tizen=500}"
+                           MaxLength="300" />
+                        <Button Text="검색"  Clicked="Entry_Completed"/>
+                    </HorizontalStackLayout>
+                </StackLayout>
+                <CollectionView x:Name="galllistViews"
+                    VerticalOptions="Start"
+                    ItemsSource="{Binding search_group_list}"
+                    SelectionMode="Single"
+                    SelectionChanged="GalllistViews_SelectionChanged"
+                    BackgroundColor="Transparent"
+                    Margin="0,0,0,10">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10">
+                                <StackLayout Spacing="2">
+                                    <HorizontalStackLayout Spacing="5">
+                                        <Label Text="{Binding title}" FontAttributes="Bold"/>
+                                        <Label Text="{Binding reply}" TextColor="Blue"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Spacing="5" >
+                                        <Label Text="{Binding userName}"/>
+                                        <Label Text="{Binding views}"/>
+                                        <Label Text="{Binding recommend}"/>
+                                    </HorizontalStackLayout>
+                                </StackLayout>
+                                <HorizontalStackLayout Spacing="5" VerticalOptions="EndAndExpand" HorizontalOptions="End">
+                                    <Label Text="{Binding subject}"/>
+                                    <Label Text="{Binding time}"/>
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <ActivityIndicator 
+                    x:Name="loadingbar" 
+                    IsRunning="False" 
+                    IsVisible="False"
+                    WidthRequest="{OnPlatform Android=50, iOS=50}"
+                    HeightRequest="{OnPlatform Android=50, iOS=50}">
+                </ActivityIndicator>
+                <Button x:Name="requestListAdd" 
+                        Margin="5,1,5,5" 
+                        Text="더보기" 
+                        Clicked="Btn_RequestListAdd"
+                        IsVisible="False"/>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="OniigallApp.Views.DetailPage"
+             Title="DetailPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="첨부파일" Clicked="ToolbarItem_Clicked_Files"
+                     IconImageSource="folder_logo.png"/>
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <VerticalStackLayout>
+            <StackLayout Spacing="2" HorizontalOptions="Center">
+                <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label 
+                        x:Name="textTitle"
+                        Text="-"
+                        FontAttributes="Bold"
+                        FontSize="Subtitle"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="5">
+                    <Label x:Name="userText"
+                        FontSize="{OnPlatform WinUI=Micro, MacCatalyst=Micro, Tizen=Micro}"/>
+                    <Label x:Name="countText"
+                        FontSize="{OnPlatform WinUI=Micro, MacCatalyst=Micro, Tizen=Micro}"/>
+                    <Label x:Name="commentText"
+                        FontSize="{OnPlatform WinUI=Micro, MacCatalyst=Micro, Tizen=Micro}"/>
+                    <Label x:Name="replynumText"
+                        FontSize="{OnPlatform WinUI=Micro, MacCatalyst=Micro, Tizen=Micro}"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label x:Name="dateText"
+                        FontSize="{OnPlatform WinUI=Micro, MacCatalyst=Micro, Tizen=Micro}"/>
+                </HorizontalStackLayout>
+            </StackLayout>
+            <Line BackgroundColor="#808080" StrokeThickness="2" Margin="10,0,10,0" />
+            <StackLayout 
+                x:Name="stackLayout"     
+                HorizontalOptions="Center" 
+                VerticalOptions="Center" 
+                Spacing="5">
+            </StackLayout>
+            <ActivityIndicator 
+                x:Name="loadingbar" 
+                Margin="0,10,0,0"
+                IsRunning="False"
+                WidthRequest="{OnPlatform Android=50, iOS=50}"
+                HeightRequest="{OnPlatform Android=50, iOS=50}">
+            </ActivityIndicator>
+            <HorizontalStackLayout Margin="0,5,0,5" VerticalOptions="Center" HorizontalOptions="Center" Spacing="5">
+                <Button x:Name="btnUpText" BackgroundColor="#0000FF" TextColor="White" Text="추천: -" />
+                <Button x:Name="btnDownText" Background="#808080" TextColor="White" Text="비추천: -" />
+            </HorizontalStackLayout>
+            <Line BackgroundColor="#808080" StrokeThickness="2" Margin="10,0,10,0" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ScrollView>
+                    <CollectionView x:Name="commentListView"
+                    ItemsSource="{Binding comment_group}"
+                    SelectionMode="None"
+                    BackgroundColor="Transparent"
+                    Margin="0,0,0,10">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="10">
+                                    <Frame BackgroundColor="Transparent" CornerRadius="0">
+                                        <Grid Padding="5">
+                                            <StackLayout Spacing="2">
+                                                <HorizontalStackLayout Spacing="5">
+                                                    <Label Text="{Binding userName}" FontAttributes="Bold"/>
+                                                </HorizontalStackLayout>
+                                                <HorizontalStackLayout Spacing="5" >
+                                                    <Label Text="{Binding text}" 
+                                                       IsVisible="{Binding labelVisible}"/>
+                                                    <Image 
+                                                    IsAnimationPlaying="True"  
+                                                    Source="{Binding image}" 
+                                                    HeightRequest="100" 
+                                                    WidthRequest="100" 
+                                                    IsVisible="{Binding ImageVisible}" 
+                                                    Aspect="AspectFill">
+                                                    </Image>
+                                                </HorizontalStackLayout>
+                                                <HorizontalStackLayout Spacing="5">
+                                                    <Label Text="{Binding time}"/>
+                                                </HorizontalStackLayout>
+                                            </StackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+                <ActivityIndicator 
+                    x:Name="comment_loadingbar" 
+                    Margin="0,10,0,0"
+                    IsRunning="False"
+                    IsVisible="False"
+                    WidthRequest="{OnPlatform Android=50, iOS=50}"
+                    HeightRequest="{OnPlatform Android=50, iOS=50}">
+                </ActivityIndicator>
+            </Grid>
+            <Line BackgroundColor="#808080" StrokeThickness="2" Margin="10,0,10,0" />
+            <HorizontalStackLayout Spacing="3" HorizontalOptions="Center" Margin="0,10,0,10">
+                <Picker 
+                    x:Name="commentPicker" 
+                    ItemsSource="{Binding comment_page}"
+                    ItemDisplayBinding="{Binding number}">
+                </Picker>
+                <Button Text="Go" Clicked="BtnPicker" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

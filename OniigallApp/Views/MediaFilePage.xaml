@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OniigallApp.Views.MediaFilePage"
+             Title="MediaFilePage">
+    <ScrollView>
+        <StackLayout HorizontalOptions="Center"
+                 VerticalOptions="Center"
+                 Spacing="5">
+            <StackLayout>
+                <Label Text="미리보기"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+                <Image x:Name="webImagePreview" 
+                   IsVisible="False"
+                   HeightRequest="{OnPlatform WinUI=500, MacCatalyst=500, Tizen=500, Android=400, iOS=400 }"
+                   IsAnimationPlaying="True">
+                </Image>
+                <ActivityIndicator 
+                    x:Name="loadingbar" 
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    IsRunning="True" 
+                    IsVisible="False"
+                    WidthRequest="{OnPlatform Android=50, iOS=50}"
+                    HeightRequest="{OnPlatform Android=50, iOS=50}">
+                </ActivityIndicator>
+            </StackLayout>
+            <Picker x:Name="filePicker"
+                HorizontalOptions="Center"
+                SelectedIndexChanged="OnPickerSelectedIndexChanged"
+                ItemsSource="{Binding file_group}"
+                ItemDisplayBinding="{Binding fileName}"
+                SelectedIndex="1">
+            </Picker>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="3">
+                <Button x:Name="BtnDownload" Text="다운로드" Clicked="Button_Download" />
+                <ActivityIndicator 
+                    x:Name="btnDownloadloadingbar" 
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    IsRunning="True" 
+                    IsVisible="False"
+                    WidthRequest="{OnPlatform Android=50, iOS=50}"
+                    HeightRequest="{OnPlatform Android=50, iOS=50}">
+                </ActivityIndicator>
+            </HorizontalStackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
