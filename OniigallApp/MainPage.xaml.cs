@@ -1,7 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Text;
 using OniigallApp.UIFrame;
 using dcSniper.API;
 using OniigallApp.Views;
