@@ -6,3 +6,5 @@
 
 # Screenshots
 ![imgapp](https://github.com/LiberRuth/OniigallApp/assets/124418235/57487cb3-d437-408b-8cd6-14ab535200ec)
+
+![img2app](https://github.com/LiberRuth/OniigallApp/assets/124418235/65404e46-48da-49e6-be2b-df7864c4e0a3)
