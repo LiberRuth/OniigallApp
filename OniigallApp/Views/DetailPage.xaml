@@ -79,7 +79,7 @@
                                                     Source="{Binding image}" 
                                                     HeightRequest="100" 
                                                     WidthRequest="100" 
-                                                    IsVisible="{Binding ImageVisible}" 
+                                                    IsVisible="{Binding imageVisible}" 
                                                     Aspect="AspectFill">
                                                     </Image>
                                                 </HorizontalStackLayout>

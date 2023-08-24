@@ -13,6 +13,6 @@ namespace OniigallApp.UIFrame
         public StreamImageSource image { get; set; }
         public string time { get; set; }
         public bool labelVisible { get; set; }
-        public bool ImageVisible { get; set; }
+        public bool imageVisible { get; set; }
     }
 }

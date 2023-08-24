@@ -241,7 +241,7 @@ public partial class DetailPage : ContentPage
                     text = comments.memo,
                     image = memoObj,
                     labelVisible = LabelVisible,
-                    ImageVisible = ImageVisible,
+                    imageVisible = ImageVisible,
                     time = comments.reg_date,
                 });
             }
