@@ -8,6 +8,7 @@ using OniigallApp.UIFrame;
 using System.Collections.ObjectModel;
 using HtmlAgilityPack;
 using OniigallApp.MediaRendering;
+using Microsoft.Maui;
 
 namespace OniigallApp.Views;
 
@@ -16,6 +17,8 @@ public partial class DetailPage : ContentPage
     private int commentPage = 0; 
     private int commentCountPage = 1;
     private string temporaryURL;
+    private int commentImgWidth;
+    private int commentImgHeight;
     private List<IDictionary<string, string>> mediaData;
 
     ImageRendering imageRequest = new ImageRendering();
@@ -195,15 +198,34 @@ public partial class DetailPage : ContentPage
         HtmlDocument doc = new HtmlDocument();
         doc.LoadHtml(HTML);
         var imgType = doc.DocumentNode.SelectSingleNode(".//img[@class='written_dccon ']");
+        var largeImgType = doc.DocumentNode.SelectSingleNode(".//img[@class='written_dccon bigdccon']");
         var videoType = doc.DocumentNode.SelectSingleNode(".//video[@class='written_dccon ']");
+        var largeVideoType = doc.DocumentNode.SelectSingleNode(".//video[@class='written_dccon bigdccon']");
 
         if (imgType != null)
         {
-            return await imageRequest.LoadImage(imgType.Attributes["src"].Value);
+            var imgStreamObj = await imageRequest.LoadImage(imgType.Attributes["src"].Value);
+            commentImgWidth = 100; commentImgHeight = 100;
+            return imgStreamObj;
         }
         else if (videoType != null) 
         {
-            return await imageRequest.LoadImage(videoType.Attributes["data-src"].Value);
+            var videoStreamObj = await imageRequest.LoadImage(videoType.Attributes["data-src"].Value);
+            commentImgWidth = 100; commentImgHeight = 100;
+            return videoStreamObj;
+        }
+
+        if (largeImgType != null) 
+        {
+            var imgStreamObj = await imageRequest.LoadImage(largeImgType.Attributes["src"].Value);
+            commentImgWidth = 150; commentImgHeight = 150;
+            return imgStreamObj;
+        }
+        else if (largeVideoType != null)
+        {
+            var videoStreamObj = await imageRequest.LoadImage(largeVideoType.Attributes["data-src"].Value);
+            commentImgWidth = 150; commentImgHeight = 150;
+            return videoStreamObj;
         }
 
         return null;
@@ -242,6 +264,8 @@ public partial class DetailPage : ContentPage
                     image = memoObj,
                     labelVisible = LabelVisible,
                     imageVisible = ImageVisible,
+                    imageSizeWidth = commentImgWidth,
+                    imageSizeHeight = commentImgHeight,
                     time = comments.reg_date,
                 });
             }

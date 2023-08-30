@@ -14,5 +14,7 @@ namespace OniigallApp.UIFrame
         public string time { get; set; }
         public bool labelVisible { get; set; }
         public bool imageVisible { get; set; }
+        public int imageSizeWidth { get; set; }
+        public int imageSizeHeight { get; set; }
     }
 }
