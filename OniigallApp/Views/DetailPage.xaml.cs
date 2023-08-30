@@ -194,16 +194,16 @@ public partial class DetailPage : ContentPage
     {
         HtmlDocument doc = new HtmlDocument();
         doc.LoadHtml(HTML);
-        var imgTy = doc.DocumentNode.SelectSingleNode(".//img[@class='written_dccon']");
-        var videoTy = doc.DocumentNode.SelectSingleNode(".//video[@class='written_dccon']");
+        var imgType = doc.DocumentNode.SelectSingleNode(".//img[@class='written_dccon ']");
+        var videoType = doc.DocumentNode.SelectSingleNode(".//video[@class='written_dccon ']");
 
-        if (imgTy != null)
+        if (imgType != null)
         {
-            return await imageRequest.LoadImage(imgTy.Attributes["src"].Value);
+            return await imageRequest.LoadImage(imgType.Attributes["src"].Value);
         }
-        else if (videoTy != null) 
+        else if (videoType != null) 
         {
-            return await imageRequest.LoadImage(videoTy.Attributes["data-src"].Value);
+            return await imageRequest.LoadImage(videoType.Attributes["data-src"].Value);
         }
 
         return null;
